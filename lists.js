@@ -153,3 +153,7 @@ class LinkedList {
           }
      }
 }
+
+module.exports = {
+     _Node, LinkedList
+}

@@ -26,6 +26,7 @@ const { mSort, merge, qSort, partition, swap } = require('./sort-functions')
 // of the array is in the following order: 3 9 1 14 17 24 22 20. Which of the following 
 // statements is correct about the partition step? Explain your answer.
 
+// ANSWER:
 // The pivot could have been either 14 or 17
 // The numbers to the left of 14 and 17 are smaller and the numbers to the right of 14 and 17 are larger,
 // so either can be the pivot point.
@@ -51,8 +52,8 @@ const { mSort, merge, qSort, partition, swap } = require('./sort-functions')
 // 80 98 46 27 22 87 49 83 6 39 42 51 54 
 // 84 34 53 78 40 14 5.
 
-let DATA = '89 30 25 32 72 70 51 42 25 24 53 55 78 50 13 40 48 32 26 2 14 33 45 72 56 44 21 88 27 68 15 62 93 98 73 28 16 46 87 28 65 38 67 16 85 63 23 69 64 91 9 70 81 27 97 82 6 88 3 7 46 13 11 64 76 31 26 38 28 13 17 69 90 1 6 7 64 43 9 73 80 98 46 27 22 87 49 83 6 39 42 51 54 84 34 53 78 40 14 5'
-DATA = DATA.map(number => parseInt(number))
+let DATA = [89, 30, 25, 32, 72, 70, 51, 42, 25, 24, 53, 55, 78, 50, 13, 40, 48, 32, 26, 2, 14, 33, 45, 72, 56, 44, 21, 88, 27, 68, 15, 62, 93, 98, 73, 28, 16, 46, 87, 28, 65, 38, 67, 16, 85, 63, 23, 69, 64, 91, 9, 70, 81, 27, 97, 82, 6, 88, 3, 7, 46, 13, 11, 64, 76, 31, 26, 38, 28, 13, 17, 69, 90, 1, 6, 7, 64, 43, 9, 73, 80, 98, 46, 27, 22, 87, 49, 83, 6, 39, 42, 51, 54, 84, 34, 53, 78, 40, 14, 5]
+// DATA = DATA.map(number => parseInt(number))
 
 function drillThree() {
      const sorted = qSort(DATA);
@@ -88,7 +89,98 @@ console.log(drillFour());
 // You will need your linked list class from previous lesson to 
 // create the list and use all of its supplemental functions to solve this problem.
 
+function mSortList(list) {
+     let currNode = list.head;
+     if (currNode.next === null) {
+          return list;
+     }
+     let length = 1;
+     while (currNode.next === null) {
+          length++;
+          currNode = currNode.next
+     }
+     const middle = Math.floor( length / 2);
+     let leftList = splitList(list, 0, middle);
+     let rightList = splitList(list, middle, length);
+     leftList = mSortList(leftList)
+     rightList = mSortList(rightList)
 
+     return mergeLists(leftList, rightList)
+}
+
+function splitList(list, start, end) {
+     let currNode = list.head;
+     if (currNode.next === null) {
+          return;
+     }
+     const returnList = new LinkedList();
+     let i = 0;
+     while(currNode !== null) {
+          if(i >= start && i < end) {
+               returnList.insertLast(currNode.value);
+          }
+          i++;
+          currNode = currNode.next;
+     }
+     return returnList;
+}
+
+function mergeLists(leftList, rightList) {
+     const merged = new LinkedList();
+     let currLeft = leftList.head;
+     let currRight = rightList.head;
+
+     while (currLeft, currRight) {
+          if (currLeft.value <= currRight.value) {
+               merged.insertLast(currLeft.value);
+               currLeft = currLeft.next;
+          }
+          else {
+               merged.insertLast(currRight.value);
+               currRight = currRight.next;
+          }
+     }
+     while (currLeft) {
+          merged.insertLast(currLeft.value);
+          currLeft = currLeft.next;
+     }
+     while (currRight) {
+          merged.insertLast(currRight.value);
+          currRight = currRight.next;
+     }
+     return merged
+}
+
+function drillFive() {
+     const newLinkedList = new LinkedList();
+
+     newLinkedList.insertFirst(7);
+     newLinkedList.insertFirst(8);
+     newLinkedList.insertFirst(3);
+     newLinkedList.insertFirst(6);
+     newLinkedList.insertFirst(4);
+     newLinkedList.insertFirst(1);
+     newLinkedList.insertFirst(2);
+     newLinkedList.insertFirst(5);
+
+     const sorted = mSortList(newLinkedList);
+     display(sorted);
+}
+
+console.log(drillFive())
+
+function drillFiveTwo() {
+     const newLinkedListOne = new LinkedList();
+     newLinkedListOne.insertFirst(2);
+
+     const newLinkedListTwo = new LinkedList();
+     newLinkedListTwo.insertFirst(4);
+
+     const mergedAgain = mergeLists(newLinkedListOne, newLinkedListTwo);
+     display(mergedAgain);
+}
+
+console.log(drillFiveTwo())
 
 // 6. Bucket sort
 // Write an O(n) algorithm to sort an array of integers, 
