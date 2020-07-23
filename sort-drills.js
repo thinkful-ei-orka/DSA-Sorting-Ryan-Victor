@@ -66,7 +66,7 @@ function drillThree() {
      console.log(facts)
 }
 
-console.log(drillThree());
+// console.log(drillThree());
 
 // 4. Implementing merge sort
 // Write a function mSort that sorts the dataset above using the merge sort algorithm.
@@ -82,7 +82,7 @@ function drillFour() {
      console.log(facts)
 }
 
-console.log(drillFour());
+// console.log(drillFour());
 
 // 5. Sorting a linked list using merge sort
 // Given a Linked List, sort the linked list using merge sort. 
@@ -167,7 +167,7 @@ function drillFive() {
      display(sorted);
 }
 
-console.log(drillFive())
+// console.log(drillFive())
 
 function drillFiveTwo() {
      const newLinkedListOne = new LinkedList();
@@ -180,7 +180,7 @@ function drillFiveTwo() {
      display(mergedAgain);
 }
 
-console.log(drillFiveTwo())
+// console.log(drillFiveTwo())
 
 // 6. Bucket sort
 // Write an O(n) algorithm to sort an array of integers, 
@@ -210,25 +210,140 @@ function bucket(arr, min, max) {
 }
 
 function drillSix() {
-     const arr = [1, 2, 3, 4, 5, 7];
+     const arr = [15, 2, 10, 4, 5, 3];
      const max = Math.max(...arr)
      const min = Math.min(...arr)
 
-     bucket(arr, min, max);
+     console.log(bucket(arr, min, max));
      console.log(arr)
 }
 
-console.log(drillSix())
-
+// console.log(drillSix())
 
 // 7. Sort in place
 // Write an algorithm to shuffle an array into a random order in place 
 // (i.e., without creating a new array).
 
+const sample = [1, 3, 5, 7, 9, 2, 4, 6, 8, 10]
 
+function sortInPlace(arr) {
+     for(let i = 0; i < arr.length; i++) {
+          let random = Math.floor(Math.random() * arr.length);
+          swap(arr, i, random)
+     }
+     return arr
+}
+
+function drillSeven() {
+     sortInPlace(sample)
+     console.log(sample)
+}
+
+drillSeven();
 
 // 8. Sorting books
 // Imagine that I gave you 20 books to sort in alphabetical order. 
 // Express this as an algorithm and then implement your algorithm.
 
+// function alphabetical(string1, string2, index = 0) {
+//      if (string1 = string2) {
+//           return true;
+//      }
 
+//      if (string1.toLowerCase().charCodeAt([index]) < string2.toLowerCase().charCodeAt([index])) {
+//           return true;
+//      }
+
+//      else if (string1.toLowerCase().charCodeAt([index]) > string2.toLowerCase().charCodeAt([index])) {
+//           return false;
+//      }
+
+//      else {
+//           return alphabetical(string1, string2, index + 1)
+//      }
+// }
+
+// function mSortBooks(array) {
+//      if (array.length <= 1) {
+//           return array;
+//      }
+
+//      const middle = Math.floor(array.length / 2);
+//      let left = array.slice(0, middle);
+//      let right = array.slice(middle, array.length);
+
+//      left = mSortBooks(left);
+//      right = mSortBooks(right);
+//      return mergeBooks(left, right, array);
+// };
+
+// function mergeBooks(left, right, array) {
+//      let leftIndex = 0;
+//      let rightIndex = 0;
+//      let outputIndex = 0;
+//      while (leftIndex < left.length && rightIndex < right.length) {
+//           if (alphabetical(left[leftIndex], right[rightIndex])) {
+//                array[outputIndex++] = left[leftIndex++];
+//           }
+//           else {
+//                array[outputIndex++] = right[rightIndex++];
+//           }
+//      }
+
+//      for (let i = leftIndex; i < left.length; i++) {
+//           array[outputIndex++] = left[i];
+//      }
+
+//      for (let i = rightIndex; i < right.length; i++) {
+//           array[outputIndex++] = right[i];
+//      }
+//      return array;
+// };
+
+Array.prototype.bubbleSort = function () {
+     let n = this.length;
+     while (n !== 0) {
+       let placeholder = 0;
+       for (let i = 1; i < this.length; i++) {
+         if (this[i] < this[i - 1]) {
+           let save = this[i];
+           this[i] = this[i - 1];
+           this[i - 1] = save;
+           placeholder = i;
+         }
+       }
+       n = placeholder;
+     }
+     return this;
+   };
+
+function drillEight() {
+
+     const bookList = [
+          'SQL In Easy Steps',
+          'Out Of Control',
+          'Dune',
+          'Foundation',
+          'Fellowship Of The Ring',
+          'Two Towers',
+          'Return Of The King',
+          'Tomie',
+          'Shiver',
+          'Uzumaki',
+          'Contact',
+          'A Scanner Darkly',
+          'Enders Game',
+          'Anthem',
+          'I, Robot',
+          'Wheel Of Time',
+          'Time Machine',
+          'Pygmy',
+          'Eragon',
+          'Hey Nostradamus'
+     ];
+
+     console.log(bookList.bubbleSort());
+
+}
+
+drillEight()
