@@ -1,9 +1,17 @@
-function display(head) {
-     let currNode = head
-     while (currNode.next !== null) {
-          currNode = currNode.next
+function display(list) {
+     if (list.head === null) {
+          console.log(list.head)
      }
-     return console.log(currNode.value)
+     else  {
+          let i = 0;
+          let item = list.head;
+          while (item.next !== null) {
+               console.log(`${i}: ${item.value}`);
+               i++;
+               item = item.next;
+          }
+     console.log(`${i}: ${item.value}`)          
+     }
 }
 
 function size(list) {

@@ -95,7 +95,7 @@ function mSortList(list) {
           return list;
      }
      let length = 1;
-     while (currNode.next === null) {
+     while (currNode.next !== null) {
           length++;
           currNode = currNode.next
      }
@@ -130,7 +130,7 @@ function mergeLists(leftList, rightList) {
      let currLeft = leftList.head;
      let currRight = rightList.head;
 
-     while (currLeft, currRight) {
+     while (currLeft && currRight) {
           if (currLeft.value <= currRight.value) {
                merged.insertLast(currLeft.value);
                currLeft = currLeft.next;
