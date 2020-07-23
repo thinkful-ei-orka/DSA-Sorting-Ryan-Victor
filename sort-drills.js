@@ -187,6 +187,38 @@ console.log(drillFiveTwo())
 // where you know in advance what the lowest and highest values are. 
 // You can't use arr.splice(), shift() or unshift() for this exercise.
 
+function bucket(arr, min, max) {
+     const numberMap = new Map();
+     for (let i = 0; i < arr.length; i++) {
+          if (numberMap.get(arr[i]) === undefined) {
+               numberMap.set(arr[i], 1);
+          }
+          else {
+               numberMap.set(arr[i], numberMap.get(arr[i]) + 1)
+          }
+     }
+     let arrayOfI = 0;
+     for (let i = min; i <= max; i++) {
+          let num = numberMap.get(i);
+          while (num) {
+               arr[arrayOfI] = i;
+               num--;
+               arrayOfI++;
+          }
+     }
+     return arr
+}
+
+function drillSix() {
+     const arr = [1, 2, 3, 4, 5, 7];
+     const max = Math.max(...arr)
+     const min = Math.min(...arr)
+
+     bucket(arr, min, max);
+     console.log(arr)
+}
+
+console.log(drillSix())
 
 
 // 7. Sort in place
